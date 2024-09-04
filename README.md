@@ -1,7 +1,9 @@
-# Plex Streamlit Dashboard
+# Micro Plex Dashboard
 
 ## Overview
-This is a simple, yet powerful, Streamlit application that serves as a public frontend for a Plex server. It displays user and library statistics in a clean, intuitive interface.
+This aims to be a simple & small application that serves as a public frontend for a Plex server. 
+
+It displays user and library statistics in a clean, intuitive interface.
 
 ## Features
 - Display currently watching users, and library items with totals.
