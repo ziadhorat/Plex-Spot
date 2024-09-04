@@ -1,12 +1,16 @@
 # Micro Plex Dashboard
 
+![image](https://github.com/user-attachments/assets/52d50193-35ea-4e23-839e-b7944654605b)
+
 ## Overview
 This aims to be a simple & small application that serves as a public frontend for a Plex server. 
 
 It displays user and library statistics in a clean, intuitive interface.
 
+Sometimes I am asked what is on my Plex server. This is my attempt at a set and forget solution.
+
 ## Features
-- Display currently watching users, and library items with totals.
+- Display library items with totals & currently watching users.
 - Simple deployment using Docker and Docker Compose.
 
 ## Environment Variables
