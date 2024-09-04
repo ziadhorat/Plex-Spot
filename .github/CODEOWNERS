@@ -1,0 +1,2 @@
+# Require approval for workflow files
+.github/workflows/*  @ziadhorat
