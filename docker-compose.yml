@@ -1,0 +1,13 @@
+version: '3'
+services:
+  plex-streamlit-app:
+    build: .
+    environment:
+      - PLEX_API_TOKEN=${PLEX_API_TOKEN}
+      - PLEX_SERVER_URL=${PLEX_SERVER_URL}
+      - DASHBOARD_TITLE=${DASHBOARD_TITLE}
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+
