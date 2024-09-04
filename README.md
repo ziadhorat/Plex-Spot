@@ -40,7 +40,7 @@ docker run -d --name plex-streamlit-app \
   -e PLEX_API_TOKEN=your_plex_api_token_here \
   -e PLEX_SERVER_URL=http://localhost:32400 \
   -e DASHBOARD_TITLE="Micro Plex Dashboard" \
-  your-username/plex-streamlit-app
+  ziadhorat/micro-plex-dashboard
 ```
 
 ## Notes
