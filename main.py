@@ -10,7 +10,7 @@ logger = setup_logging()
 def main():
     plex_server_url = os.getenv("PLEX_SERVER_URL", "http://localhost:32400")
     plex_api_token = os.getenv("PLEX_API_TOKEN", "none")
-    dashboard_title = os.getenv("DASHBOARD_TITLE", "Micro-Plex Dashboard")
+    dashboard_title = os.getenv("DASHBOARD_TITLE", "Micro Plex Dashboard")
 
     plex_client = PlexClient(plex_server_url, plex_api_token)
 
