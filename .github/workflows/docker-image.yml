@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with:
-        quiet: true  # Minimize checkout output
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -30,6 +28,8 @@ jobs:
 
     - name: Log in to GitHub Container Registry (GHCR)
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Explicitly use GITHUB_TOKEN
       continue-on-error: false  # Fail if authentication fails
 
     - name: Extract version from tag
@@ -46,7 +46,6 @@ jobs:
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:latest
           ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:${{ env.VERSION }}
-        quiet: true  # Suppress Docker build logs
       continue-on-error: false  # Fail if build or push fails
 
     - name: Build and push Docker image to GHCR
@@ -57,7 +56,6 @@ jobs:
         tags: |
           ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
           ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
-        quiet: true  # Suppress Docker build logs
       continue-on-error: false  # Fail if build or push fails
 
     - name: Log out from Docker Hub and GHCR
