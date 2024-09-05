@@ -18,8 +18,8 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 ## Environment Variables
 - `PLEX_API_TOKEN`: Your Plex API token. **[Required]**
 - `PLEX_SERVER_URL`: URL of your plex server, include `http`/`https`, exclude trailing `/`. **[Required]**
-- `DASHBOARD_TITLE`: Whatever you want the page title to be. **[Optional]**
-- `DASHBOARD_ICON`: Whatever you want the page icon & Favicon to be. **[Optional]**
+- `DASHBOARD_TITLE`: Page & Site title can be configured here. **[Optional]**
+- `DASHBOARD_ICON`: Page & Site icon can be configured here. **[Optional]**
 
 ## Installation
 
@@ -57,11 +57,8 @@ docker run -d --name micro-plex-dashboard \
 
 ## TODO
 - ARM Support
-- Make favicon configurable via env var (with default)
-- Set Browser page title to env var (Already set for header).
 - JF/Emby Support?
 - Some pagination might be needed to support large libraries.
-- Check if dashboard can be displayed across the page.
 - Poster/Artist cover to be displayed along with IMDB links if available.
   
 ## Contributing
