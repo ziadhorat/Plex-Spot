@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Updated to v3
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2  # Updated to v2
       with:
         install: true
       continue-on-error: false  # Fail if setup fails
@@ -26,32 +26,32 @@ jobs:
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
     - name: Build Docker image (without pushing)
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3  # Updated to v3
       with:
         context: .
         push: false  # Only build, don't push yet
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/plex-spot:latest
-          ${{ secrets.DOCKER_USERNAME }}/plex-spot:${{ env.VERSION }}
-          ghcr.io/${{ github.repository_owner }}/plex-spot:latest
-          ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}
+          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:latest
+          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:${{ env.VERSION }}
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
       continue-on-error: false  # Fail if build fails
 
     - name: Log in to Docker Hub
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2  # Updated to v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
       continue-on-error: false  # Fail if authentication fails
 
     - name: Push Docker image to Docker Hub
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3  # Updated to v3
       with:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/plex-spot:latest
-          ${{ secrets.DOCKER_USERNAME }}/plex-spot:${{ env.VERSION }}
+          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:latest
+          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:${{ env.VERSION }}
       continue-on-error: false  # Fail if push fails
 
     - name: Log out from Docker Hub
@@ -64,13 +64,13 @@ jobs:
       continue-on-error: false  # Fail if authentication fails
 
     - name: Push Docker image to GHCR
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3  # Updated to v3
       with:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/plex-spot:latest
-          ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
       continue-on-error: false  # Fail if push fails
 
     - name: Log out from GHCR
