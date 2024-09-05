@@ -44,7 +44,7 @@ Open a web browser and navigate to `http://localhost:8501`.
 ## Docker Run Command
 If you prefer to run the container using `docker run`, use the following command:
 ```bash
-docker run -d --name micro-plex-dashboard \
+docker run -d --name plex-spot \
   -p 8501:8501 \
   -e PLEX_API_TOKEN=your_plex_api_token_here \
   -e PLEX_SERVER_URL=http://localhost:32400 \
@@ -53,7 +53,7 @@ docker run -d --name micro-plex-dashboard \
 
 ## Notes
 - If you use a reverse proxy, you will require websocket support/enabled.
-- Only tested with Movie/TV/Music Libraries.
+- Tested with Movie/TV/Music Libraries (Supports 1 server only).
 
 ## TODO
 - ARM Support on Docker image.
