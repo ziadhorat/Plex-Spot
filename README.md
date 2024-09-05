@@ -1,5 +1,5 @@
+# <img src="https://github.com/user-attachments/assets/59e7618e-2436-471f-b1b8-0bb3b02e6fb2" alt="iCON" width="30" height="30"> PlexSpot
 
-# ![iCON](https://github.com/user-attachments/assets/59e7618e-2436-471f-b1b8-0bb3b02e6fb2) Micro Plex Dashboard
 
 [Dockerhub - ziadhorat/ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
 
