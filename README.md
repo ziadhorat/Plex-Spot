@@ -26,7 +26,7 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/ziadhorat/Plex-Spot.git
-cd Micro-Plex-Dashboard
+cd Plex-Spot
 ```
 ### 2. Create a `.env` file
 Copy the .env.example to .env and fill in the necessary values
