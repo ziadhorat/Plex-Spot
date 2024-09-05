@@ -51,6 +51,21 @@ docker run -d --name plex-spot \
   ziadhorat/plex-spot
 ```
 
+## Deploy with `docker-compose.yml`
+
+```yaml
+version: '3'
+services:
+  plex-spot:
+    container_name: plex-spot
+    ports:
+      - "8501:8501"
+    environment:
+      - PLEX_API_TOKEN=your_plex_api_token_here
+      - PLEX_SERVER_URL=http://localhost:32400
+    image: ziadhorat/plex-spot
+```
+
 ## Notes
 - If you use a reverse proxy, you will require websocket support/enabled.
 - Tested with Movie/TV/Music Libraries (Supports 1 server only).
@@ -62,6 +77,7 @@ docker run -d --name plex-spot \
 - Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
 - Extend support to additional media servers like Emby or Jellyfin.
 - Consider querying Tautulli instead of Plex for better data access.
+- Test the compose file - docker-compose.yml.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
