@@ -1,4 +1,5 @@
-# Micro Plex Dashboard
+
+# ![iCON](https://github.com/user-attachments/assets/59e7618e-2436-471f-b1b8-0bb3b02e6fb2) Micro Plex Dashboard
 
 [Dockerhub - ziadhorat/ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
 
