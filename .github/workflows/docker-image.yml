@@ -31,10 +31,10 @@ jobs:
         context: .
         push: false  # Only build, don't push yet
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:latest
-          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:${{ env.VERSION }}
-          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
-          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
+          ${{ secrets.DOCKER_USERNAME }}/plex-spot:latest
+          ${{ secrets.DOCKER_USERNAME }}/plex-spot:${{ env.VERSION }}
+          ghcr.io/${{ github.repository_owner }}/plex-spot:latest
+          ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}
       continue-on-error: false  # Fail if build fails
 
     - name: Log in to Docker Hub
@@ -50,8 +50,8 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:latest
-          ${{ secrets.DOCKER_USERNAME }}/micro-plex-dashboard:${{ env.VERSION }}
+          ${{ secrets.DOCKER_USERNAME }}/plex-spot:latest
+          ${{ secrets.DOCKER_USERNAME }}/plex-spot:${{ env.VERSION }}
       continue-on-error: false  # Fail if push fails
 
     - name: Log out from Docker Hub
@@ -69,8 +69,8 @@ jobs:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
-          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
+          ghcr.io/${{ github.repository_owner }}/plex-spot:latest
+          ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}
       continue-on-error: false  # Fail if push fails
 
     - name: Log out from GHCR
