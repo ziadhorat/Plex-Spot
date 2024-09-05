@@ -16,9 +16,10 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 - Simple deployment using Docker and Docker Compose.
 
 ## Environment Variables
-- `PLEX_API_TOKEN`: Your Plex API token.
-- `PLEX_SERVER_URL`: URL of your plex server, include http/https.
-- `DASHBOARD_TITLE`: Whatever you want the page title to be.
+- `PLEX_API_TOKEN`: Your Plex API token. [Required]
+- `PLEX_SERVER_URL`: URL of your plex server, include `http`/`https`, exclude trailing `/`. [Required]
+- `DASHBOARD_TITLE`: Whatever you want the page title to be. [Optional]
+- `DASHBOARD_ICON`: Whatever you want the page icon & Favicon to be. [Optional]
 
 ## Installation
 
@@ -47,7 +48,6 @@ docker run -d --name micro-plex-dashboard \
   -p 8501:8501 \
   -e PLEX_API_TOKEN=your_plex_api_token_here \
   -e PLEX_SERVER_URL=http://localhost:32400 \
-  -e DASHBOARD_TITLE="Micro Plex Dashboard" \
   ziadhorat/micro-plex-dashboard
 ```
 
