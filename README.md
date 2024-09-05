@@ -60,6 +60,7 @@ docker run -d --name micro-plex-dashboard \
 - JF/Emby Support?
 - Some pagination might be needed to support large libraries.
 - Poster/Artist cover to be displayed along with IMDB links if available.
+- Deactivate usage statistics in Streamlit.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
