@@ -1,6 +1,6 @@
 # <img src="https://cdn-icons-png.freepik.com/256/7664/7664156.png?uid=R161963193&ga=GA1.1.651749782.1725523197&semt=ais_hybrid" alt="iCON" width="30" height="30"> PlexSpot
 
-[Dockerhub - ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
+[Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot)
 
 ![image](https://github.com/user-attachments/assets/b73ed36e-cb28-4403-b73c-e7d23602f4dc)
 
@@ -48,7 +48,7 @@ docker run -d --name plex-spot \
   -p 8501:8501 \
   -e PLEX_API_TOKEN=your_plex_api_token_here \
   -e PLEX_SERVER_URL=http://localhost:32400 \
-  ziadhorat/micro-plex-dashboard
+  ziadhorat/plex-spot
 ```
 
 ## Notes
