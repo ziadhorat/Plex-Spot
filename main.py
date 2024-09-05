@@ -10,11 +10,21 @@ logger = setup_logging()
 def main():
     plex_server_url = os.getenv("PLEX_SERVER_URL", "http://localhost:32400")
     plex_api_token = os.getenv("PLEX_API_TOKEN", "none")
-    dashboard_title = os.getenv("DASHBOARD_TITLE", "Micro Plex Dashboard")
+    dashboard_title = os.getenv("DASHBOARD_TITLE", "PlexSpot")
+    dashboard_icon = os.getenv("DASHBOARD_ICON", "https://cdn-icons-png.freepik.com/256/7664/7664156.png?uid=R161963193&ga=GA1.1.651749782.1725523197&semt=ais_hybrid")
 
     plex_client = PlexClient(plex_server_url, plex_api_token)
 
-    st.title(dashboard_title)
+    st.set_page_config(page_title=dashboard_title, page_icon=dashboard_icon, layout="wide")
+
+    # st.title(dashboard_title)
+
+    st.markdown(f"""
+        <h1 style="display: flex; align-items: center;">
+            <img src="{dashboard_icon}" style="width: 30px; margin-right: 10px;">
+            {dashboard_title}
+        </h1>
+        """, unsafe_allow_html=True)
 
     active_sessions, _ = get_user_stats(plex_client)
     col1, col2 = st.columns(2)
