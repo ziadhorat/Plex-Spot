@@ -2,7 +2,7 @@
 
 [Dockerhub - ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
 
-![image](https://github.com/user-attachments/assets/c9e7287d-3e87-4363-a3dc-a8d1bdf1c950)
+![image](https://github.com/user-attachments/assets/b73ed36e-cb28-4403-b73c-e7d23602f4dc)
 
 ## Overview
 This aims to be a simple & small application that serves as a public frontend for a Plex server. 
@@ -56,14 +56,12 @@ docker run -d --name micro-plex-dashboard \
 - Only tested with Movie/TV/Music Libraries.
 
 ## TODO
-- ARM Support
-- Some pagination might be needed to support large libraries.
+- ARM Support on Docker image.
+- Pagination might be required for large library support.
 - Poster/Artist cover to be displayed along with IMDB links if available.
-- Deactivate usage statistics in Streamlit.
-- JF/Emby Support.
-- This whole app might be better suited to query tautulli instead of plex.
-- Add plex server name before library name if possible in drop down (after this we can look at multi-server setups).
-- Remove index column in output tables.
+- Support for multiple servers (PLEX1, PLEX2).
+- Support for additional media sources (Emby/Jellyfin).
+- Maybe better to query Tautulli instead of Plex?
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
