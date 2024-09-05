@@ -2,7 +2,7 @@
 
 [Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot)
 
-![image](https://github.com/user-attachments/assets/b73ed36e-cb28-4403-b73c-e7d23602f4dc)
+![DemoGif](https://github.com/user-attachments/assets/d893729d-7bb4-451c-8e22-7ffb79b2d61a)
 
 ## Overview
 This aims to be a simple & small application that serves as a public frontend for a Plex server. 
