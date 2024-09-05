@@ -56,12 +56,12 @@ docker run -d --name plex-spot \
 - Tested with Movie/TV/Music Libraries (Supports 1 server only).
 
 ## TODO
-- ARM Support on Docker image.
-- Pagination might be required for large library support.
-- Poster/Artist cover to be displayed along with IMDB links if available.
-- Support for multiple servers (PLEX1, PLEX2).
-- Support for additional media sources (Emby/Jellyfin).
-- Maybe better to query Tautulli instead of Plex?
+- Add ARM architecture support for the Docker image.
+- Implement pagination for better handling of large libraries.
+- Display poster or artist covers, with IMDb links if available.
+- Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
+- Extend support to additional media servers like Emby or Jellyfin.
+- Consider querying Tautulli instead of Plex for better data access.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
