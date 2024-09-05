@@ -1,5 +1,7 @@
 # Micro Plex Dashboard
 
+[Dockerhub - ziadhorat/ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
+
 ![image](https://github.com/user-attachments/assets/52d50193-35ea-4e23-839e-b7944654605b)
 
 ## Overview
@@ -51,11 +53,13 @@ docker run -d --name micro-plex-dashboard \
 
 ## Notes
 - If you use a reverse proxy, you will require websocket support/enabled.
+- Only tested with Movie/TV/Music Libraries.
 
 ## TODO
 - ARM Support
-- Make favicon configurable
-- Make page title in status bar to same as title.
+- Make favicon configurable via env var (with default)
+- Set Browser page title to env var.
+- JF/Emby Support?
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
