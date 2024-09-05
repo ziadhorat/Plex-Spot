@@ -16,10 +16,10 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 - Simple deployment using Docker and Docker Compose.
 
 ## Environment Variables
-- `PLEX_API_TOKEN`: Your Plex API token. [Required]
-- `PLEX_SERVER_URL`: URL of your plex server, include `http`/`https`, exclude trailing `/`. [Required]
-- `DASHBOARD_TITLE`: Whatever you want the page title to be. [Optional]
-- `DASHBOARD_ICON`: Whatever you want the page icon & Favicon to be. [Optional]
+- `PLEX_API_TOKEN`: Your Plex API token. **[Required]**
+- `PLEX_SERVER_URL`: URL of your plex server, include `http`/`https`, exclude trailing `/`. **[Required]**
+- `DASHBOARD_TITLE`: Whatever you want the page title to be. **[Optional]**
+- `DASHBOARD_ICON`: Whatever you want the page icon & Favicon to be. **[Optional]**
 
 ## Installation
 
