@@ -1,8 +1,8 @@
-# Micro Plex Dashboard
+# <img src="https://cdn-icons-png.freepik.com/256/7664/7664156.png?uid=R161963193&ga=GA1.1.651749782.1725523197&semt=ais_hybrid" alt="iCON" width="30" height="30"> PlexSpot
 
-[Dockerhub - ziadhorat/ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
+[Dockerhub - ziadhorat/micro-plex-dashboard](https://hub.docker.com/r/ziadhorat/micro-plex-dashboard)
 
-![image](https://github.com/user-attachments/assets/52d50193-35ea-4e23-839e-b7944654605b)
+![image](https://github.com/user-attachments/assets/c9e7287d-3e87-4363-a3dc-a8d1bdf1c950)
 
 ## Overview
 This aims to be a simple & small application that serves as a public frontend for a Plex server. 
