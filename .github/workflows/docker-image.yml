@@ -3,7 +3,7 @@ name: Build and Deploy Docker Image
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'  # Trigger workflow only on version tags (e.g., v1.0.0)
 
 jobs:
   build:
@@ -28,13 +28,17 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
       continue-on-error: false  # Fail if authentication fails
 
+    - name: Log in to GitHub Container Registry (GHCR)
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      continue-on-error: false  # Fail if authentication fails
+
     - name: Extract version from tag
       id: extract_tag
       run: |
         VERSION=${GITHUB_REF#refs/tags/}
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-    - name: Build and push Docker image
+    - name: Build and push Docker image to Docker Hub
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -45,5 +49,17 @@ jobs:
         quiet: true  # Suppress Docker build logs
       continue-on-error: false  # Fail if build or push fails
 
-    - name: Log out from Docker Hub
-      run: docker logout
+    - name: Build and push Docker image to GHCR
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:latest
+          ghcr.io/${{ github.repository_owner }}/micro-plex-dashboard:${{ env.VERSION }}
+        quiet: true  # Suppress Docker build logs
+      continue-on-error: false  # Fail if build or push fails
+
+    - name: Log out from Docker Hub and GHCR
+      run: |
+        docker logout
