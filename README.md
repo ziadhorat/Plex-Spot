@@ -58,8 +58,9 @@ docker run -d --name micro-plex-dashboard \
 ## TODO
 - ARM Support
 - Make favicon configurable via env var (with default)
-- Set Browser page title to env var.
+- Set Browser page title to env var (Already set for header).
 - JF/Emby Support?
+- Some pagination might be needed to support large libraries.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
