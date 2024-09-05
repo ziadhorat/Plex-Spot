@@ -60,8 +60,9 @@ docker run -d --name micro-plex-dashboard \
 - Some pagination might be needed to support large libraries.
 - Poster/Artist cover to be displayed along with IMDB links if available.
 - Deactivate usage statistics in Streamlit.
-- JF/Emby Support?
+- JF/Emby Support.
 - This whole app might be better suited to query tautulli instead of plex.
+- Add plex server name before library name if possible in drop down (after this we can look at multi-server setups).
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
