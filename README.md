@@ -61,6 +61,7 @@ docker run -d --name micro-plex-dashboard \
 - Some pagination might be needed to support large libraries.
 - Poster/Artist cover to be displayed along with IMDB links if available.
 - Deactivate usage statistics in Streamlit.
+- This whole app might be better suited to query tautulli instead of plex.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
