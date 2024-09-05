@@ -17,8 +17,6 @@ def main():
 
     st.set_page_config(page_title=dashboard_title, page_icon=dashboard_icon, layout="wide")
 
-    # st.title(dashboard_title)
-
     st.markdown(f"""
         <h1 style="display: flex; align-items: center;">
             <img src="{dashboard_icon}" style="width: 30px; margin-right: 10px;">

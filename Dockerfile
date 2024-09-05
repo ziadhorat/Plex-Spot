@@ -33,5 +33,5 @@ ENV STREAMLIT_SERVER_HEADLESS=true
 EXPOSE 8501
 
 # Run the Streamlit app
-CMD ["streamlit", "run", "main.py"]
+CMD ["streamlit", "run", "main.py", "--browser.gatherUsageStats", "false"]
 

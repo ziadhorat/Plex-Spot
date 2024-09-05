@@ -2,6 +2,7 @@ import streamlit as st
 import xmltodict
 import logging
 import requests
+import pandas as pd
 from app.cache_manager import cache_manager
 
 logger = logging.getLogger(__name__)
@@ -32,7 +33,13 @@ def display_library_contents(library_content, library_type):
 
         if table_data:
             sorted_table_data = sorted(table_data, key=lambda x: x['Title'])
-            st.table(sorted_table_data)
+            
+            # Convert list of dicts to DataFrame
+            df = pd.DataFrame(sorted_table_data)
+            
+            # Display the DataFrame without index column
+            st.dataframe(df, use_container_width=True, hide_index=True)
+            
             return len(sorted_table_data)
         else:
             st.write("No media found in this library.")

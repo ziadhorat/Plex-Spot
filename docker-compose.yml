@@ -1,6 +1,6 @@
 version: '3'
 services:
-  plex-streamlit-app:
+  plex-spot:
     build: .
     environment:
       - PLEX_API_TOKEN=${PLEX_API_TOKEN}
