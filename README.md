@@ -61,6 +61,8 @@ docker run -d --name micro-plex-dashboard \
 - Set Browser page title to env var (Already set for header).
 - JF/Emby Support?
 - Some pagination might be needed to support large libraries.
+- Check if dashboard can be displayed across the page.
+- Poster/Artist cover to be displayed along with IMDB links if available.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
