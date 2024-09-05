@@ -63,6 +63,7 @@ docker run -d --name micro-plex-dashboard \
 - JF/Emby Support.
 - This whole app might be better suited to query tautulli instead of plex.
 - Add plex server name before library name if possible in drop down (after this we can look at multi-server setups).
+- Remove index column in output tables.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
