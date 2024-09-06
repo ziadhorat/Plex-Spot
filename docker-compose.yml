@@ -5,6 +5,7 @@ services:
     environment:
       - PLEX_API_TOKEN=${PLEX_API_TOKEN}
       - PLEX_SERVER_URL=${PLEX_SERVER_URL}
+      - DEBUG=${DEBUG}
     ports:
       - "8501:8501"
     volumes:

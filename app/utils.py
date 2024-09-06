@@ -1,9 +1,11 @@
 import logging
+import os
 
 def setup_logging():
+    logging.getLogger('watchdog.observers.inotify_buffer').setLevel(logging.WARNING)
     logging.basicConfig(
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
+        level=logging.DEBUG if os.getenv("DEBUG", "false").lower() == "true" else logging.INFO
     )
     return logging.getLogger(__name__)
 

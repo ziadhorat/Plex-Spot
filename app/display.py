@@ -3,9 +3,11 @@ import xmltodict
 import logging
 import requests
 import pandas as pd
+import os
 from app.cache_manager import cache_manager
 
 logger = logging.getLogger(__name__)
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 def display_library_contents(library_content, library_type):
     try:
@@ -53,6 +55,13 @@ def display_library_contents(library_content, library_type):
 def get_user_stats(plex_client):
     try:
         user_stats = plex_client.get_user_stats()
+        if DEBUG:
+            logger.info(f"Fetching user stats from Plex server: {plex_client.base_url}")
+        return user_stats
+    except Exception as e:
+        logger.error(f"Error fetching user stats: {e}")
+        return {}
+
         media_container = user_stats.get('MediaContainer', {})
         active_sessions = int(media_container.get('@size', 0))
         users = {video['User']['@title'] for video in media_container.get('Video', []) if isinstance(video, dict) and 'User' in video}
@@ -62,6 +71,7 @@ def get_user_stats(plex_client):
         logger.error(f"Error fetching user stats: {e}")
         logger.error(f"User stats response: {user_stats}")
         return 0, 0
+
 
 @cache_manager(ttl=3600)
 def get_library_stats(plex_client):

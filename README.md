@@ -31,6 +31,7 @@ docker run -d --name plex-spot \
   -p 8501:8501 \
   -e PLEX_API_TOKEN=your_plex_api_token_here \
   -e PLEX_SERVER_URL=http://localhost:32400 \
+  -e DEBUG=False \
   ziadhorat/plex-spot
 ```
 Open a web browser and navigate to `http://container-ip:8501`.
@@ -47,6 +48,7 @@ services:
     environment:
       - PLEX_API_TOKEN=your_plex_api_token_here
       - PLEX_SERVER_URL=http://localhost:32400
+      - DEBUG=False
     image: ziadhorat/plex-spot
 ```
 Open a web browser and navigate to `http://container-ip:8501`.
@@ -80,6 +82,8 @@ Open a web browser and navigate to `http://localhost:8501`.
 - Extend support to additional media servers like Emby or Jellyfin.
 - Consider querying Tautulli instead of Plex for better data access.
 - Test the compose file - docker-compose.yml.
+- Fix importing of OS everywhere and rather handle debug true/false status in the logger.
+- Debug logs need to be cleaned up.
   
 ## Contributing
 Feel free to submit issues or pull requests. Contributions are welcome!
