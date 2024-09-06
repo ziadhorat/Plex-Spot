@@ -17,9 +17,10 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 
 ## Environment Variables
 - `PLEX_API_TOKEN`: Your Plex API token. **[Required]**
-- `PLEX_SERVER_URL`: URL of your plex server, include `http`/`https`, exclude trailing `/`. **[Required]**
+- `PLEX_SERVER_URL`: Points your plex server, include `http`/`https`, exclude trailing `/`. **[Required]**
 - `DASHBOARD_TITLE`: Page & Site title can be configured here. **[Optional]**
 - `DASHBOARD_ICON`: Page & Site icon can be configured here. **[Optional]**
+- `DEBUG`: True/False, Enables debug info. **[Optional]**
 
 ### Creating a Plex API Token
 [Plex Guide - Step by Step - Getting Plex Token, Nimrod](https://digiex.net/threads/plex-guide-step-by-step-getting-plex-token.15402/)
