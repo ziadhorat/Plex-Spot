@@ -1,13 +1,14 @@
 version: '3'
 services:
   plex-spot:
-    container_name: plex-spot
-    image: ziadhorat/plex-spot
-    ports:
-      - "8501:8501"
+    build: ..
     environment:
       - PLEX_API_TOKEN=${PLEX_API_TOKEN}
       - PLEX_SERVER_URL=${PLEX_SERVER_URL}
       - DASHBOARD_TITLE=${DASHBOARD_TITLE}
       - DASHBOARD_ICON=${DASHBOARD_ICON}
       - DEBUG=${DEBUG}
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../:/app
