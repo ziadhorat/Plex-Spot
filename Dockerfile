@@ -32,6 +32,9 @@ ENV STREAMLIT_SERVER_HEADLESS=true
 # Expose port 8501
 EXPOSE 8501
 
+# Set /app directory to read-only, Issue #2
+RUN chmod -R 555 /app
+
 # Run the Streamlit app
 CMD ["streamlit", "run", "main.py", "--browser.gatherUsageStats", "false"]
 
