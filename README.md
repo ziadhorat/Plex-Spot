@@ -44,22 +44,28 @@ version: '3'
 services:
   plex-spot:
     container_name: plex-spot
+    image: ziadhorat/plex-spot
     ports:
       - "8501:8501"
     environment:
-      - PLEX_API_TOKEN=your_plex_api_token_here
-      - PLEX_SERVER_URL=http://localhost:32400
-      - DEBUG=False
-    image: ziadhorat/plex-spot
+      - PLEX_API_TOKEN=${PLEX_API_TOKEN}
+      - PLEX_SERVER_URL=${PLEX_SERVER_URL}
+      - DASHBOARD_TITLE=${DASHBOARD_TITLE}
+      - DASHBOARD_ICON=${DASHBOARD_ICON}
+      - DEBUG=${DEBUG}
 ```
 Open a web browser and navigate to `http://container-ip:8501`.
 
-## Build & Run (docker compose)
+## Notes
+- If you use a reverse proxy, you will require websocket support/enabled.
+- Tested with Movie/TV/Music Libraries (Supports 1 server only).
+
+## Local development (docker compose)
 
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/ziadhorat/Plex-Spot.git
-cd Plex-Spot
+cd Plex-Spot/development
 ```
 ### 2. Create a `.env` file
 Copy the .env.example to .env and fill in the necessary values
@@ -71,23 +77,18 @@ docker-compose up --build
 ### 4. Access the app
 Open a web browser and navigate to `http://localhost:8501`.
 
-## Notes
-- If you use a reverse proxy, you will require websocket support/enabled.
-- Tested with Movie/TV/Music Libraries (Supports 1 server only).
-
 ## TODO
-- Add ARM architecture support for the Docker image.
 - Implement pagination for better handling of large libraries.
 - Display poster or artist covers, with IMDb links if available.
 - Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
 - Extend support to additional media servers like Emby or Jellyfin.
 - Consider querying Tautulli instead of Plex for better data access.
-- Test the compose file - docker-compose.yml.
 - Fix importing of OS everywhere and rather handle debug true/false status in the logger.
 - Debug logs need to be cleaned up.
   
 ## Contributing
-Feel free to submit issues or pull requests. Contributions are welcome!
+Feel free to submit issues, feature or pull requests. 
+All contributions are welcome!
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
