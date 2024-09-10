@@ -1,6 +1,6 @@
 # <img src="https://cdn-icons-png.freepik.com/256/7664/7664156.png?uid=R161963193&ga=GA1.1.651749782.1725523197&semt=ais_hybrid" alt="iCON" width="30" height="30"> PlexSpot
 
-[Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot)
+[Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot) | [Demo](https://plex-spot.labhome.co.za)
 
 ![DemoGif](https://github.com/user-attachments/assets/d893729d-7bb4-451c-8e22-7ffb79b2d61a)
 
