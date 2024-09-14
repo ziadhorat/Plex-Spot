@@ -38,7 +38,22 @@ docker run -d --name plex-spot \
 Open a web browser and navigate to `http://container-ip:8501`.
 
 ## Deploy with docker compose
-`docker-compose.yml`:
+
+Create a `.env` file:
+```
+# Plex Server URL
+PLEX_SERVER_URL=http://localhost:32400
+# Plex API Token - See README.md
+PLEX_API_TOKEN=your_plex_api_token
+# Dashboard settings
+DASHBOARD_TITLE="PlexSpot"
+DASHBOARD_ICON="https://cdn-icons-png.freepik.com/256/7664/7664156.png"
+
+# Debug can be enabled below with True
+DEBUG=False
+```
+
+Create a `docker-compose.yml`:
 ```yaml
 version: '3'
 services:
@@ -54,6 +69,8 @@ services:
       - DASHBOARD_ICON=${DASHBOARD_ICON}
       - DEBUG=${DEBUG}
 ```
+Run `docker compose up -d`.
+
 Open a web browser and navigate to `http://container-ip:8501`.
 
 ## Notes
@@ -68,7 +85,7 @@ git clone https://github.com/ziadhorat/Plex-Spot.git
 cd Plex-Spot/development
 ```
 ### 2. Create a `.env` file
-Copy the .env.example to .env and fill in the necessary values
+Copy the `.env.example` to `.env` and fill in the necessary values
 
 ### 3. Build and run using Docker Compose
 ```bash
