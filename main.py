@@ -20,6 +20,9 @@ def main():
         logger.info(f"Plex server URL: {plex_server_url}")
         logger.info(f"Plex API Token: {plex_api_token[:5]}... (hidden)")
 
+    if "localhost" in plex_server_url or "127.0.0.1" in plex_server_url:
+        logger.info(f"WARNING - Localhost/127.0.0.1 may not work in your Plex server URL: {plex_server_url}")
+
     # Set up the Plex client
     plex_client = PlexClient(plex_server_url, plex_api_token)
 

@@ -17,7 +17,7 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 
 ## Environment Variables
 - `PLEX_API_TOKEN`: Your Plex API token. **[Required]**
-- `PLEX_SERVER_URL`: Points your plex server, include `http`/`https`, exclude trailing `/`. **[Required]**
+- `PLEX_SERVER_URL`: Points to your plex server, localhost/127.0.0.1 may not work use IPv4 address instead. **[Required]**
 - `DASHBOARD_TITLE`: Page & Site title can be configured here. **[Optional]**
 - `DASHBOARD_ICON`: Page & Site icon can be configured here. **[Optional]**
 - `DEBUG`: True/False, Enables debug info. **[Optional]**
@@ -75,6 +75,7 @@ Open a web browser and navigate to `http://container-ip:8501`.
 
 ## Notes
 - If you use a reverse proxy, you will require websocket support/enabled.
+- localhost/127.0.0.1 may not work use IPv4 address instead
 - Tested with Movie/TV/Music Libraries (Supports 1 server only).
 
 ## Local development (docker compose)
@@ -102,6 +103,7 @@ Open a web browser and navigate to `http://localhost:8501`.
 - Consider querying Tautulli instead of Plex for better data access.
 - Fix importing of OS everywhere and rather handle debug true/false status in the logger.
 - Debug logs need to be cleaned up.
+- Maybe rewrite GUI in google/mesop or something that does not require websockets.
   
 ## Contributing
 Feel free to submit issues, feature or pull requests. 
