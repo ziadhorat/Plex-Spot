@@ -1,37 +1,19 @@
-# Stage 1: Build dependencies in a temporary image
-FROM python:3.9-slim AS builder
+
+FROM python:3.9-alpine
 
 WORKDIR /app
 
-# Install pip-tools to compile a minimal requirements file
-RUN pip install --no-cache-dir pip-tools
+COPY requirements.txt .
 
-# Copy only the necessary files for the app
-COPY requirements.in .
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apk del .build-deps
 
-# Compile a minimal requirements.txt
-RUN pip-compile --output-file=requirements.txt requirements.in
+COPY . .
 
-# Stage 2: Final image with a minimal footprint
-FROM python:3.9-slim AS final
+ENV FLASK_APP=main.py
+ENV FLASK_RUN_HOST=0.0.0.0
 
-WORKDIR /app
+EXPOSE 5000
 
-# Install dependencies using the minimal requirements.txt
-COPY --from=builder /app/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy only necessary files to the final image
-COPY app/ app/
-COPY main.py .
-
-# Set environment variables
-ENV STREAMLIT_SERVER_PORT=8501
-ENV STREAMLIT_SERVER_HEADLESS=true
-
-# Expose port 8501
-EXPOSE 8501
-
-# Run the Streamlit app
-CMD ["streamlit", "run", "main.py", "--browser.gatherUsageStats", "false"]
-
+CMD ["flask", "run"]
