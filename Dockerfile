@@ -1,4 +1,3 @@
-
 FROM python:3.9-alpine
 
 WORKDIR /app
@@ -13,7 +12,8 @@ COPY . .
 
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=8501
 
-EXPOSE 5000
+EXPOSE 8501
 
 CMD ["flask", "run"]
