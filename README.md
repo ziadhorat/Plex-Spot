@@ -73,7 +73,6 @@ Run `docker compose up -d`.
 Open a web browser and navigate to `http://container-ip:8501`.
 
 ## 📋 Notes
-- If you use a reverse proxy, you will require websocket support/enabled.
 - localhost/127.0.0.1 may not work use IPv4 address instead
 - Tested with Movie/TV/Music Libraries (Supports 1 server only).
 
@@ -95,14 +94,13 @@ docker-compose up --build
 Open a web browser and navigate to `http://localhost:8501`.
 
 ## 📝 TODO
-- Implement pagination for better handling of large libraries.
+- Rename to media-library so Plex doesn't sue me.
 - Display poster or artist covers, with IMDb links if available.
 - Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
 - Extend support to additional media servers like Emby or Jellyfin.
 - Consider querying Tautulli instead of Plex for better data access.
 - Fix importing of OS everywhere and rather handle debug true/false status in the logger.
 - Debug logs need to be cleaned up.
-- Maybe rewrite GUI in google/mesop or something that does not require websockets.
   
 ## ✨ Contributing
 Feel free to submit issues, feature or pull requests. 
