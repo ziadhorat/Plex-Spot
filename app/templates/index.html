@@ -23,21 +23,16 @@
             background-color: #121212;
             color: #ffffff;
         }
-        .dark-mode .card {
+        .dark-mode .card, .dark-mode .form-select, .dark-mode .form-control {
             background-color: #1e1e1e;
             color: #ffffff;
+            border-color: #444;
         }
         .dark-mode .table {
             color: #ffffff;
-            background-color: #1e1e1e;
         }
-        .dark-mode .table-striped tbody tr {
-            background-color: #2c2c2c;
-        }
-        .dark-mode .form-select, .dark-mode .form-control {
-            background-color: #2c2c2c;
-            color: #ffffff;
-            border-color: #444;
+        .dark-mode .table tbody tr {
+            background-color: #1e1e1e !important;
         }
         .dark-mode footer {
             background-color: #1e1e1e;
@@ -52,8 +47,14 @@
             background-color: #007bff;
             border-color: #007bff;
         }
-        #libraryContents_wrapper .row:first-child {
-            align-items: center;
+        #controls-row {
+            margin-bottom: 1rem;
+        }
+        #controls-row > div {
+            padding: 0 5px;
+        }
+        #controls-row select, #controls-row input {
+            width: 100%;
         }
     </style>
 </head>
@@ -86,7 +87,25 @@
                 <option value="">Select a Library</option>
             </select>
         </div>
-        <table id="libraryContents" class="table table-striped">
+        <div id="controls-row" class="row">
+            <div class="col-md-3">
+                <select id="libraryContents_length" class="form-select form-select-sm">
+                    <option value="25">Show 25 entries</option>
+                    <option value="50">Show 50 entries</option>
+                    <option value="100">Show 100 entries</option>
+                    <option value="-1">Show All</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="genreFilter" class="form-select form-select-sm">
+                    <option value="">All Genres</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="search" class="form-control form-control-sm" placeholder="Search" aria-controls="libraryContents">
+            </div>
+        </div>
+        <table id="libraryContents" class="table">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -102,7 +121,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-muted">GitHub</a>
+                    <a href="https://github.com/yourusername/plex-spot" target="_blank" class="text-muted">GitHub</a>
                 </div>
                 <div class="col-6 text-end">
                     <div class="form-check form-switch">
@@ -138,14 +157,9 @@
 
             function loadGenres(libraryKey) {
                 $.get(`/api/genres/${libraryKey}`, function(genres) {
-                    let genreFilter = $('<select id="genreFilter" class="form-select form-select-sm"><option value="">All Genres</option></select>');
+                    $('#genreFilter').empty().append('<option value="">All Genres</option>');
                     genres.forEach(function(genre) {
-                        genreFilter.append(`<option value="${genre}">${genre}</option>`);
-                    });
-                    $('#libraryContents_filter').before(genreFilter);
-                    genreFilter.on('change', function() {
-                        let selectedGenre = $(this).val();
-                        table.column(2).search(selectedGenre).draw();
+                        $('#genreFilter').append(`<option value="${genre}">${genre}</option>`);
                     });
                 });
             }
@@ -167,16 +181,25 @@
                     });
                     table = $('#libraryContents').DataTable({
                         "pageLength": 25,
-                        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]]
+                        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                        "dom": 't<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        "language": {
+                            "lengthMenu": "_MENU_"
+                        }
                     });
                     $('#libraryTotal').text(data.length);
                     loadGenres(libraryKey);
                     
-                    // Adjust the layout to have all controls on one line
-                    $('#libraryContents_wrapper .row:first-child > div:nth-child(2)').removeClass('col-md-6').addClass('col-md-3');
-                    $('#libraryContents_filter').parent().removeClass('col-md-6').addClass('col-md-3');
-                    $('#genreFilter').wrap('<div class="col-md-3"></div>');
-                    $('#libraryContents_wrapper .row:first-child').addClass('align-items-center');
+                    // Connect custom controls to DataTable
+                    $('#libraryContents_length').on('change', function() {
+                        table.page.len($(this).val()).draw();
+                    });
+                    $('#controls-row input[type="search"]').on('keyup', function() {
+                        table.search(this.value).draw();
+                    });
+                    $('#genreFilter').on('change', function() {
+                        table.column(2).search(this.value).draw();
+                    });
                 });
             }
 
