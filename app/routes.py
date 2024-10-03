@@ -17,8 +17,12 @@ def index():
 @app.route('/api/user_stats')
 @cache.cached(timeout=60)
 def user_stats():
-    stats = plex_client.get_user_stats()
-    return jsonify(stats)
+    try:
+        stats = plex_client.get_user_stats()
+        return jsonify(stats)
+    except Exception as e:
+        logger.error(f"Error in user_stats route: {str(e)}")
+        return jsonify({'error': 'Unable to fetch user stats'}), 500
 
 @app.route('/api/libraries')
 @cache.cached(timeout=3600)
