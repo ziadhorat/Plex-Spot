@@ -1,9 +1,7 @@
 import requests
 import xmltodict
-import logging
 import os
-
-logger = logging.getLogger(__name__)
+from app import cache
 
 class PlexClient:
     def __init__(self, base_url, token):
@@ -12,14 +10,10 @@ class PlexClient:
         self.headers = {
             "X-Plex-Token": self.token
         }
-        
-        if os.getenv("DEBUG", "false").lower() == "true":
-            logger.debug(f"PlexClient initialized with URL: {self.base_url} and Token: {self.token}")
 
+    @cache.cached(timeout=3600)
     def get_user_stats(self):
         url = f"{self.base_url}/status/sessions"
-        if os.getenv("DEBUG", "false").lower() == "true":
-            logger.debug(f"Fetching user stats from Plex server: {url}")
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         
@@ -39,10 +33,16 @@ class PlexClient:
             'total_users': total_users
         }
 
+    @cache.cached(timeout=3600)
     def get_library_stats(self):
         url = f"{self.base_url}/library/sections"
-        if os.getenv("DEBUG", "false").lower() == "true":
-            logger.debug(f"Fetching library stats from Plex server: {url}")
+        response = requests.get(url, headers=self.headers)
+        response.raise_for_status()
+        return xmltodict.parse(response.text)
+
+    @cache.cached(timeout=3600)
+    def get_library_contents(self, library_key):
+        url = f"{self.base_url}/library/sections/{library_key}/all"
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return xmltodict.parse(response.text)

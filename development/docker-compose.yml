@@ -9,6 +9,6 @@ services:
       - DASHBOARD_ICON=${DASHBOARD_ICON}
       - DEBUG=${DEBUG}
     ports:
-      - "8501:8501"
+      - "5000:5000"
     volumes:
       - ../:/app
