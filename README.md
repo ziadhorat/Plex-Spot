@@ -94,6 +94,7 @@ docker-compose up --build
 Open a web browser and navigate to `http://localhost:8501`.
 
 ## 📝 TODO
+- Select a library by default if available.
 - Rename to media-library so Plex doesn't sue me.
 - Display poster or artist covers, with IMDb links if available.
 - Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
