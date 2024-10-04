@@ -17,26 +17,23 @@
         }
         footer {
             height: 60px;
-            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
         }
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
         }
-        .dark-mode .card, .dark-mode .form-select, .dark-mode .form-control {
+        .dark-mode .card, 
+        .dark-mode .form-select, 
+        .dark-mode .form-control,
+        .dark-mode .table,
+        .dark-mode footer {
             background-color: #1e1e1e;
             color: #ffffff;
             border-color: #444;
         }
-        .dark-mode .table {
-            color: #ffffff;
-        }
         .dark-mode .table tbody tr {
             background-color: #1e1e1e !important;
-        }
-        .dark-mode footer {
-            background-color: #1e1e1e;
-            color: #ffffff;
         }
         .dark-mode .page-item:not(.active) .page-link {
             background-color: #2c2c2c;
@@ -126,7 +123,7 @@
                 <div class="col-6 text-end">
                     <div class="form-check form-switch">
                         <label class="form-check-label me-2" for="darkModeToggle">Dark Mode</label>
-                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle" checked>
                     </div>
                 </div>
             </div>
@@ -139,6 +136,32 @@
     <script>
         $(document).ready(function() {
             let table;
+            let defaultLibrary = "{{ default_library|default('', true) }}";
+
+            // Function to set dark mode
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    $('body').addClass('dark-mode');
+                    $('#darkModeToggle').prop('checked', true);
+                } else {
+                    $('body').removeClass('dark-mode');
+                    $('#darkModeToggle').prop('checked', false);
+                }
+                localStorage.setItem('darkMode', isDark);
+            }
+    
+            // Check localStorage for dark mode preference
+            const savedDarkMode = localStorage.getItem('darkMode');
+            if (savedDarkMode !== null) {
+                setDarkMode(savedDarkMode === 'true');
+            } else {
+                setDarkMode(true); // Default to dark mode if no preference is saved
+            }
+    
+            // Dark mode toggle handler
+            $('#darkModeToggle').change(function() {
+                setDarkMode(this.checked);
+            });
 
             function updateUserStats() {
                 $.get('/api/user_stats', function(data) {
@@ -152,6 +175,16 @@
                     data.forEach(function(library) {
                         $('#librarySelect').append(`<option value="${library.key}">${library.title}</option>`);
                     });
+                    if (defaultLibrary) {
+                        $('#librarySelect').val(defaultLibrary);
+                        loadLibraryContents(defaultLibrary);
+                    } else if (data.length > 0) {
+                        defaultLibrary = data[0].key;
+                        $('#librarySelect').val(defaultLibrary);
+                        loadLibraryContents(defaultLibrary);
+                    } else {
+                        $('#libraryContents tbody').html('<tr><td colspan="3">No libraries available</td></tr>');
+                    }
                 });
             }
 
