@@ -14,10 +14,12 @@
         }
         .content-wrapper {
             min-height: calc(100vh - 60px);
+            padding: 0 15px;  /* Add padding to the content wrapper */
         }
         footer {
             height: 60px;
             transition: background-color 0.3s, color 0.3s;
+            background-color: #f8f9fa;  /* Light mode background */
         }
         body.dark-mode {
             background-color: #121212;
@@ -53,9 +55,32 @@
         #controls-row select, #controls-row input {
             width: 100%;
         }
+        /* Ensure consistent padding for all elements */
+        .card, #librarySelect, #controls-row, #libraryContents {
+            margin-bottom: 1rem;
+        }
+        /* New styles */
+        .controls-wrapper {
+            padding: 0 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .dataTables_wrapper .row {
+            margin: 0;
+            align-items: center;
+        }
+        
+        .dataTables_info, .dataTables_paginate {
+            padding: 0 15px;
+        }
+        
+        .dataTables_paginate {
+            display: flex;
+            justify-content: flex-end;
+        }
     </style>
 </head>
-<body>
+<body class="dark-mode">
     <div class="content-wrapper container-fluid py-3">
         <h1 class="mb-4">
             <img src="{{ icon }}" alt="PlexSpot Icon" style="width: 30px; margin-right: 10px;">
@@ -84,7 +109,7 @@
                 <option value="">Select a Library</option>
             </select>
         </div>
-        <div id="controls-row" class="row">
+        <div id="controls-row" class="row controls-wrapper">
             <div class="col-md-3">
                 <select id="libraryContents_length" class="form-select form-select-sm">
                     <option value="25">Show 25 entries</option>
@@ -118,13 +143,10 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-6">
-                    <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-muted">GitHub</a>
+                    <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-muted">Github: Plex-spot</a>
                 </div>
                 <div class="col-6 text-end">
-                    <div class="form-check form-switch">
-                        <label class="form-check-label me-2" for="darkModeToggle">Dark Mode</label>
-                        <input class="form-check-input" type="checkbox" id="darkModeToggle" checked>
-                    </div>
+                    <span id="darkModeToggle" style="cursor: pointer;">Light Mode</span>
                 </div>
             </div>
         </div>
@@ -137,31 +159,24 @@
         $(document).ready(function() {
             let table;
             let defaultLibrary = "{{ default_library|default('', true) }}";
+            let isDarkMode = true;
 
-            // Function to set dark mode
-            function setDarkMode(isDark) {
-                if (isDark) {
-                    $('body').addClass('dark-mode');
-                    $('#darkModeToggle').prop('checked', true);
-                } else {
-                    $('body').removeClass('dark-mode');
-                    $('#darkModeToggle').prop('checked', false);
-                }
-                localStorage.setItem('darkMode', isDark);
+            function toggleDarkMode() {
+                isDarkMode = !isDarkMode;
+                $('body').toggleClass('dark-mode', isDarkMode);
+                $('#darkModeToggle').text(isDarkMode ? 'Light Mode' : 'Dark Mode');
+                localStorage.setItem('darkMode', isDarkMode);
             }
-    
+
+            $('#darkModeToggle').click(toggleDarkMode);
+
             // Check localStorage for dark mode preference
             const savedDarkMode = localStorage.getItem('darkMode');
             if (savedDarkMode !== null) {
-                setDarkMode(savedDarkMode === 'true');
-            } else {
-                setDarkMode(true); // Default to dark mode if no preference is saved
+                isDarkMode = savedDarkMode === 'true';
+                $('body').toggleClass('dark-mode', isDarkMode);
+                $('#darkModeToggle').text(isDarkMode ? 'Light Mode' : 'Dark Mode');
             }
-    
-            // Dark mode toggle handler
-            $('#darkModeToggle').change(function() {
-                setDarkMode(this.checked);
-            });
 
             function updateUserStats() {
                 $.get('/api/user_stats', function(data) {
@@ -215,10 +230,11 @@
                     table = $('#libraryContents').DataTable({
                         "pageLength": 25,
                         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-                        "dom": 't<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        "dom": '<"row"<"col-sm-12"t>><"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                         "language": {
                             "lengthMenu": "_MENU_"
-                        }
+                        },
+                        "width": "100%"
                     });
                     $('#libraryTotal').text(data.length);
                     loadGenres(libraryKey);
@@ -241,10 +257,6 @@
                 if (selectedLibrary) {
                     loadLibraryContents(selectedLibrary);
                 }
-            });
-
-            $('#darkModeToggle').change(function() {
-                $('body').toggleClass('dark-mode');
             });
 
             updateUserStats();
