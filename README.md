@@ -8,7 +8,7 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 
 Links: [Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot) | [Demo](https://plex-spot.labhome.co.za)
 
-![DemoGif](https://github.com/user-attachments/assets/d893729d-7bb4-451c-8e22-7ffb79b2d61a)
+![DemoGif](https://github.com/user-attachments/assets/b90e1033-ab9e-4b67-bba8-c5bb406b3410)
 
 ## 🌟 Features
 - Display all library items with totals & currently watching users (No auth).
