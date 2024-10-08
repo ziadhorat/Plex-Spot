@@ -34,70 +34,92 @@
             background: #0056b3 !important;
             color: white !important;
         }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            flex: 1;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        .full-width-container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
-    <nav class="bg-white dark:bg-gray-800 shadow-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <nav class="bg-white dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-10">
+        <div class="full-width-container mx-auto py-3 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 text-xl font-semibold">
                 <img src="{{ icon }}" alt="PlexSpot Icon" class="w-8 h-8">
                 <span>{{ title }}</span>
             </a>
-        </div>
-    </nav>
-
-    <div class="flex-grow p-4">
-        <div class="grid md:grid-cols-2 gap-4 mb-4">
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
-                <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-play-circle mr-2"></i>Active Streams</h5>
-                <p class="text-3xl font-bold" id="activeStreams">Loading...</p>
-            </div>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
-                <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-film mr-2"></i>Library Total</h5>
-                <p class="text-3xl font-bold" id="libraryTotal">Loading...</p>
-            </div>
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-            <select id="librarySelect" class="w-full mb-4 p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                <option value="">Select a Library</option>
-            </select>
-            <div class="grid md:grid-cols-3 gap-4 mb-4">
-                <select id="libraryContents_length" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                    <option value="25">Show 25 entries</option>
-                    <option value="50">Show 50 entries</option>
-                    <option value="100">Show 100 entries</option>
-                    <option value="-1">Show All</option>
-                </select>
-                <select id="genreFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                    <option value="">All Genres</option>
-                </select>
-                <input type="search" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" placeholder="Search" aria-controls="libraryContents">
-            </div>
-            <div class="overflow-x-auto">
-                <table id="libraryContents" class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-200 dark:bg-gray-700">
-                            <th class="p-3">Title</th>
-                            <th class="p-3">Year</th>
-                            <th class="p-3">Genres</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-white dark:bg-gray-800 shadow-md mt-auto">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-                <i class="fab fa-github mr-2"></i>Github: Plex-spot
-            </a>
             <button id="darkModeToggle" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
                 <i class="fas fa-moon mr-2"></i>Dark Mode
             </button>
+        </div>
+    </nav>
+
+    <main class="pt-16 pb-16"> <!-- Changed this line -->
+        <div class="full-width-container mx-auto px-4"> <!-- Added this wrapper -->
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
+                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-play-circle mr-2"></i>Active Streams</h5>
+                    <p class="text-3xl font-bold" id="activeStreams">Loading...</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
+                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-film mr-2"></i>Library Total</h5>
+                    <p class="text-3xl font-bold" id="libraryTotal">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-width-container mx-auto px-4"> <!-- Added this wrapper -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+                <select id="librarySelect" class="w-full mb-4 p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                    <option value="">Select a Library</option>
+                </select>
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <select id="libraryContents_length" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        <option value="25">Show 25 entries</option>
+                        <option value="50">Show 50 entries</option>
+                        <option value="100">Show 100 entries</option>
+                        <option value="-1">Show All</option>
+                    </select>
+                    <select id="genreFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        <option value="">All Genres</option>
+                    </select>
+                    <input type="search" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" placeholder="Search" aria-controls="libraryContents">
+                </div>
+                <div class="overflow-x-auto">
+                    <table id="libraryContents" class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-200 dark:bg-gray-700">
+                                <th class="p-3">Title</th>
+                                <th class="p-3">Year</th>
+                                <th class="p-3">Genres</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white dark:bg-gray-800 shadow-md fixed bottom-0 left-0 right-0">
+        <div class="full-width-container mx-auto py-3 flex justify-between items-center">
+            <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                <i class="fab fa-github mr-2"></i>Github: Plex-spot
+            </a>
         </div>
     </footer>
 
