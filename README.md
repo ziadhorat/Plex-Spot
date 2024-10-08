@@ -10,7 +10,7 @@ Links: [Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex
 
 https://github.com/USERID/REPO/workflows/NAME-OF-YOUR-WORKFLOW/badge.svg
 
-[![Build & Deploy](https://github.com/USERID/REPO/workflows/Build-and-Deploy-Docker-Image/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml)
+[Build](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml)
 
 ![DemoGif](https://github.com/user-attachments/assets/ea9717e0-d322-45b8-8765-184858774d75)
 
