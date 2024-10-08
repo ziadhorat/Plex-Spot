@@ -7,6 +7,7 @@
     <link rel="icon" href="{{ icon }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -19,6 +20,21 @@
             }
         }
     </script>
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.3em 0.8em;
+            margin: 0 0.2em;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #007bff !important;
+            color: white !important;
+            border: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #0056b3 !important;
+            color: white !important;
+        }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
     <nav class="bg-white dark:bg-gray-800 shadow-md">
@@ -159,7 +175,7 @@
                     table = $('#libraryContents').DataTable({
                         "pageLength": 25,
                         "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-                        "dom": '<"my-4"t><"flex justify-between items-center"<"text-gray-600 dark:text-gray-400"i><"flex"p>>',
+                        "dom": '<"my-4"t><"flex flex-col md:flex-row justify-between items-center"<"text-gray-600 dark:text-gray-400"i><"mt-4 md:mt-0"p>>',
                         "language": {
                             "lengthMenu": "_MENU_"
                         },
@@ -167,8 +183,11 @@
                             $('.paginate_button').addClass('px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600');
                             $('.paginate_button.current').addClass('bg-primary text-white');
                         },
-                        "scrollCollapse": true,
-                        "paging": true
+                        "paging": true,
+                        "ordering": true,
+                        "info": true,
+                        "searching": true,
+                        "responsive": true
                     });
                     $('#libraryTotal').text(data.length);
                     loadGenres(libraryKey);
