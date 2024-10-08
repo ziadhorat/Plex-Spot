@@ -73,7 +73,7 @@ Run `docker compose up -d`.
 Open a web browser and navigate to `http://container-ip:8501`.
 
 ## 📋 Notes
-- localhost/127.0.0.1 may not work use IPv4 address instead
+- localhost/127.0.0.1 may not work use IPv4 address instead (When connecting to Plex on the same host).
 - Tested with Movie/TV/Music Libraries (Supports 1 server only).
 
 ## 📌 Local development (docker compose)
