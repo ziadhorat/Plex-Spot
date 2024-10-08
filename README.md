@@ -8,7 +8,7 @@ Sometimes I am asked what is on my Plex server. This is my attempt at a set and 
 
 Links: [Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot) | [Demo](https://plex-spot.labhome.co.za)
 
-![example workflow](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg)
+![docker-image.yml](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg) ![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg)
 
 ![DemoGif](https://github.com/user-attachments/assets/ea9717e0-d322-45b8-8765-184858774d75)
 
