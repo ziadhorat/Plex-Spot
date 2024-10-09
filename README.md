@@ -2,7 +2,12 @@
 
 PlexSpot: Your Plex server's elegant public face. Showcase your media library with style and simplicity.
 
-[![Docker Image CI](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml) [![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql) [![Pages Build Deployment](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment)
+[![GitHub Release][release-img]][release]
+[![License][license-img]][license]
+
+[![Docker Image CI](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml) 
+[![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql) 
+[![Pages Build Deployment](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment)
 
 [Docker Hub](https://hub.docker.com/r/ziadhorat/plex-spot) | [Live Demo](https://plex-spot.labhome.co.za)
 
@@ -59,3 +64,8 @@ Issues, features, and pull requests welcome! Let's make PlexSpot even better tog
 ## 📜 License
 
 MIT License. See [LICENSE](LICENSE) for details.
+
+[release]: https://github.com/ziadhorat/Plex-Spot/releases/latest
+[release-img]: https://img.shields.io/github/ziadhorat/Plex-Spot.svg?logo=github
+[license]: https://github.com/ziadhorat/Plex-Spot/blob/master/LICENSE
+[license-img]: https://img.shields.io/github/license/ziadhorat/Plex-Spot
