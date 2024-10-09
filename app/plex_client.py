@@ -61,7 +61,10 @@ class PlexClient:
     def get_library_contents(self, library_key):
         try:
             response = self._make_request(f"/library/sections/{library_key}/all")
-            return xmltodict.parse(response.text)
+            data = xmltodict.parse(response.text)
+            logger.info(f"Successfully fetched library contents for key: {library_key}")
+            return data
         except Exception as e:
-            logger.error(f"Error getting library contents: {str(e)}")
-            return {'MediaContainer': {'Video': []}}
+            logger.error(f"Error getting library contents for key {library_key}: {str(e)}")
+            logger.error(traceback.format_exc())
+            return None

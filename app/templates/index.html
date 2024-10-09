@@ -20,6 +20,9 @@
             }
         }
     </script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css">
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 0.3em 0.8em;
@@ -52,10 +55,74 @@
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        .info-button {
+            cursor: pointer;
+            color: #007bff;
+            margin-left: 5px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .info-button:hover {
+            opacity: 1;
+        }
+        .tippy-box {
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dark .tippy-box {
+            background-color: #2d3748;
+            color: #f8f9fa;
+            border-color: #4a5568;
+        }
+        .tippy-content {
+            padding: 10px;
+        }
+        .tippy-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .tippy-genres, .tippy-content-rating {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .tippy-summary {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .tippy-details {
+            margin-top: 10px;
+        }
+        .tippy-studio {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        .tippy-summary {
+            font-size: 0.9em;
+        }
+        /* Adjust header and footer styles */
+        nav, footer {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: #f8f9fa;
+        }
+        footer {
+            background-color: #e9ecef;
+        }
+        .dark nav {
+            background-color: #2d3748;
+        }
+        .dark footer {
+            background-color: #1a202c;
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
-    <nav class="bg-white dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-10">
+    <nav class="fixed top-0 left-0 right-0 z-10 transition-colors duration-200">
         <div class="full-width-container mx-auto py-3 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-2 text-xl font-semibold">
                 <img src="{{ icon }}" alt="PlexSpot Icon" class="w-8 h-8">
@@ -86,7 +153,7 @@
                 <select id="librarySelect" class="w-full mb-4 p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     <option value="">Select a Library</option>
                 </select>
-                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
                     <select id="libraryContents_length" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                         <option value="25">Show 25 entries</option>
                         <option value="50">Show 50 entries</option>
@@ -95,6 +162,9 @@
                     </select>
                     <select id="genreFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                         <option value="">All Genres</option>
+                    </select>
+                    <select id="contentRatingFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                        <option value="">All Content Ratings</option>
                     </select>
                     <input type="search" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" placeholder="Search" aria-controls="libraryContents">
                 </div>
@@ -105,7 +175,7 @@
                                 <th class="p-3">Title</th>
                                 <th class="p-3">Year</th>
                                 <th class="p-3">Genres</th>
-                                <th class="p-3">Added Date</th>
+                                <th class="p-3">Content Rating</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,10 +186,10 @@
         </div>
     </main>
 
-    <footer class="bg-white dark:bg-gray-800 shadow-md fixed bottom-0 left-0 right-0">
+    <footer class="fixed bottom-0 left-0 right-0 transition-colors duration-200">
         <div class="full-width-container mx-auto py-3 flex justify-between items-center">
             <a href="https://github.com/ziadhorat/plex-spot" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-                <i class="fab fa-github mr-2"></i>Github: Plex-spot
+                <i class="fab fa-github mr-2"></i>Github: Plex-Spot
             </a>
         </div>
     </footer>
@@ -180,57 +250,108 @@
                 });
             }
 
+            function escapeHtml(unsafe) {
+                return unsafe
+                     .replace(/&/g, "&amp;")
+                     .replace(/</g, "&lt;")
+                     .replace(/>/g, "&gt;")
+                     .replace(/"/g, "&quot;")
+                     .replace(/'/g, "&#039;");
+            }
+
             function loadLibraryContents(libraryKey) {
-                $.get(`/api/library_contents/${libraryKey}`, function(data) {
-                    if (table) {
-                        table.destroy();
+                $.ajax({
+                    url: `/api/library_contents/${libraryKey}`,
+                    method: 'GET',
+                    success: function(data) {
+                        if (table) {
+                            table.destroy();
+                        }
+                        $('#libraryContents tbody').empty();
+                        let contentRatings = new Set();
+                        data.forEach(function(item) {
+                            $('#libraryContents tbody').append(`
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <td class="p-3" data-sort="${escapeHtml(item.title)}">
+                                        <span class="info-button mr-2" data-tippy-content="
+                                            <div class='tippy-title'>${escapeHtml(item.title)} (${escapeHtml(item.year)})</div>
+                                            <div class='tippy-studio'>Studio: ${escapeHtml(item.studio || 'N/A')}</div>
+                                            <div class='tippy-genres'><strong>Genres:</strong> ${escapeHtml(item.genres)}</div>
+                                            <div class='tippy-content-rating'><strong>Content Rating:</strong> ${escapeHtml(item.contentRating)}</div>
+                                            <div class='tippy-summary'>${escapeHtml(item.summary || 'No summary available.')}</div>
+                                            <div class='tippy-details'>
+                                                <strong>Added:</strong> ${escapeHtml(item.added_date)}<br>
+                                                <strong>Rating:</strong> ${escapeHtml(item.rating)}<br>
+                                                <strong>Audience Rating:</strong> ${escapeHtml(item.audienceRating)}
+                                            </div>
+                                        ">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        ${escapeHtml(item.title)}
+                                    </td>
+                                    <td class="p-3">${escapeHtml(item.year)}</td>
+                                    <td class="p-3">${escapeHtml(item.genres)}</td>
+                                    <td class="p-3">${escapeHtml(item.contentRating)}</td>
+                                </tr>
+                            `);
+                            contentRatings.add(item.contentRating);
+                        });
+                        
+                        // Populate content rating filter
+                        $('#contentRatingFilter').empty().append('<option value="">All Content Ratings</option>');
+                        contentRatings.forEach(function(rating) {
+                            $('#contentRatingFilter').append(`<option value="${rating}">${rating}</option>`);
+                        });
+                        
+                        table = $('#libraryContents').DataTable({
+                            "pageLength": 25,
+                            "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                            "dom": '<"my-4"t><"flex flex-col md:flex-row justify-between items-center"<"text-gray-600 dark:text-gray-400"i><"mt-4 md:mt-0"p>>',
+                            "language": {
+                                "lengthMenu": "_MENU_"
+                            },
+                            "drawCallback": function() {
+                                $('.paginate_button').addClass('px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600');
+                                $('.paginate_button.current').addClass('bg-primary text-white');
+                            },
+                            "paging": true,
+                            "ordering": true,
+                            "info": true,
+                            "searching": true,
+                            "responsive": true
+                        });
+                        
+                        $('#libraryTotal').text(data.length);
+                        
+                        $('#libraryContents_length').on('change', function() {
+                            table.page.len($(this).val()).draw();
+                        });
+                        $('input[type="search"]').on('keyup', function() {
+                            table.search(this.value).draw();
+                        });
+                        $('#genreFilter').on('change', function() {
+                            table.column(2).search(this.value).draw();
+                        });
+                        $('#contentRatingFilter').on('change', function() {
+                            table.column(3).search(this.value).draw();
+                        });
+
+                        // Initialize Tippy tooltips
+                        tippy('.info-button', {
+                            theme: 'light',
+                            placement: 'right',
+                            allowHTML: true,
+                            interactive: true,
+                            maxWidth: 300,
+                        });
+
+                        // Load genres for the selected library
+                        loadGenres(libraryKey);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Error fetching library contents:", textStatus, errorThrown);
+                        $('#libraryContents tbody').html('<tr><td colspan="4" class="text-center p-3">Error loading library contents. Please try again later.</td></tr>');
                     }
-                    $('#libraryContents tbody').empty();
-                    data.forEach(function(item) {
-                        $('#libraryContents tbody').append(`
-                            <tr class="border-b border-gray-200 dark:border-gray-700">
-                                <td class="p-3">${item.title}</td>
-                                <td class="p-3">${item.year}</td>
-                                <td class="p-3">${item.genres}</td>
-                                <td class="p-3">${item.added_date}</td>
-                            </tr>
-                        `);
-                    });
-                    table = $('#libraryContents').DataTable({
-                        "pageLength": 25,
-                        "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-                        "dom": '<"my-4"t><"flex flex-col md:flex-row justify-between items-center"<"text-gray-600 dark:text-gray-400"i><"mt-4 md:mt-0"p>>',
-                        "language": {
-                            "lengthMenu": "_MENU_"
-                        },
-                        "drawCallback": function() {
-                            $('.paginate_button').addClass('px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600');
-                            $('.paginate_button.current').addClass('bg-primary text-white');
-                        },
-                        "paging": true,
-                        "ordering": true,
-                        "info": true,
-                        "searching": true,
-                        "responsive": true,
-                        "columns": [
-                            null,
-                            null,
-                            null,
-                            { "type": "date" }
-                        ]
-                    });
-                    $('#libraryTotal').text(data.length);
-                    loadGenres(libraryKey);
-                    
-                    $('#libraryContents_length').on('change', function() {
-                        table.page.len($(this).val()).draw();
-                    });
-                    $('input[type="search"]').on('keyup', function() {
-                        table.search(this.value).draw();
-                    });
-                    $('#genreFilter').on('change', function() {
-                        table.column(2).search(this.value).draw();
-                    });
                 });
             }
 
