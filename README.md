@@ -1,112 +1,61 @@
 # <img src="https://cdn-icons-png.freepik.com/256/7664/7664156.png?uid=R161963193&ga=GA1.1.651749782.1725523197&semt=ais_hybrid" alt="iCON" width="30" height="30"> PlexSpot
 
-This aims to be a simple & small application that serves as a public frontend for a Plex server. 
+PlexSpot: Your Plex server's elegant public face. Showcase your media library with style and simplicity.
 
-It displays user and library statistics in a clean, intuitive interface.
+[![Docker Image CI](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml) [![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql) [![Pages Build Deployment](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment)
 
-Sometimes I am asked what is on my Plex server. This is my attempt at a set and forget solution.
-
-Links: [Dockerhub - ziadhorat/plex-spot](https://hub.docker.com/r/ziadhorat/plex-spot) | [Demo](https://plex-spot.labhome.co.za)
-
-![docker-image.yml](https://github.com/ziadhorat/Plex-Spot/actions/workflows/docker-image.yml/badge.svg) ![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg) ![Pades-Build-deployment](https://github.com/ziadhorat/Plex-Spot/actions/workflows/pages/pages-build-deployment/badge.svg)
+[Docker Hub](https://hub.docker.com/r/ziadhorat/plex-spot) | [Live Demo](https://plex-spot.labhome.co.za)
 
 ![DemoGif](https://github.com/user-attachments/assets/ea9717e0-d322-45b8-8765-184858774d75)
 
-## 🌟 Features
-- Display all library items with totals & currently watching users (No auth).
-- Simple deployment using Docker and Docker Compose.
+## 🚀 Quick Start
 
-## ⚙️ Environment Variables
-- `PLEX_API_TOKEN`: Your Plex API token. **[Required]**
-- `PLEX_SERVER_URL`: Points to your plex server, localhost/127.0.0.1 may not work use IPv4 address instead. **[Required]**
-- `DASHBOARD_TITLE`: Page & Site title can be configured here. **[Optional]**
-- `DASHBOARD_ICON`: Page & Site icon can be configured here. **[Optional]**
-- `DEBUG`: True/False, Enables debug info. **[Optional]**
-
-### Creating a Plex API Token
-[Plex Guide - Step by Step - Getting Plex Token, Nimrod](https://digiex.net/threads/plex-guide-step-by-step-getting-plex-token.15402/)
-
-## 🚀 Docker Run Command
-If you prefer to run the container using `docker run`, use the following command:
 ```bash
 docker run -d --name plex-spot \
   -p 8501:8501 \
-  -e PLEX_API_TOKEN=your_plex_api_token_here \
-  -e PLEX_SERVER_URL=http://localhost:32400 \
-  -e DEBUG=False \
+  -e PLEX_API_TOKEN=your_token_here \
+  -e PLEX_SERVER_URL=http://your_server_ip:32400 \
   ziadhorat/plex-spot
 ```
-Open a web browser and navigate to `http://container-ip:8501`.
 
-## 📊 Deploy with docker compose
+Access at `http://localhost:8501`
 
-Create a `.env` file:
-```
-# Plex Server URL
-PLEX_SERVER_URL=http://localhost:32400
-# Plex API Token - See README.md
-PLEX_API_TOKEN=your_plex_api_token
-# Dashboard settings
-DASHBOARD_TITLE="PlexSpot"
-DASHBOARD_ICON="https://cdn-icons-png.freepik.com/256/7664/7664156.png"
+## 🌟 Why PlexSpot?
 
-# Debug can be enabled below with True
-DEBUG=False
-```
+- Sleek, public-facing interface for your Plex library
+- Real-time user activity and library statistics
+- Effortless setup with Docker
 
-Create a `docker-compose.yml`:
+## 🛠 Configuration
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `PLEX_API_TOKEN` | Your Plex API token | Yes |
+| `PLEX_SERVER_URL` | Your Plex server URL | Yes |
+| `DASHBOARD_TITLE` | Custom dashboard title | No |
+| `DASHBOARD_ICON` | Custom dashboard icon URL | No |
+| `DEBUG` | Enable debug mode (True/False) | No |
+
+Need help getting your Plex token? [Follow this guide](https://digiex.net/threads/plex-guide-step-by-step-getting-plex-token.15402/)
+
+## 📊 Docker Compose
+
 ```yaml
 version: '3'
 services:
   plex-spot:
-    container_name: plex-spot
     image: ziadhorat/plex-spot
     ports:
       - "8501:8501"
     environment:
       - PLEX_API_TOKEN=${PLEX_API_TOKEN}
       - PLEX_SERVER_URL=${PLEX_SERVER_URL}
-      - DASHBOARD_TITLE=${DASHBOARD_TITLE}
-      - DASHBOARD_ICON=${DASHBOARD_ICON}
-      - DEBUG=${DEBUG}
 ```
-Run `docker compose up -d`.
 
-Open a web browser and navigate to `http://container-ip:8501`.
+## 🤝 Contribute
 
-## 📋 Notes
-- localhost/127.0.0.1 may not work use IPv4 address instead (When connecting to Plex on the same host).
-- Tested with Movie/TV/Music Libraries (Supports 1 server only).
+Issues, features, and pull requests welcome! Let's make PlexSpot even better together.
 
-## 📌 Local development (docker compose)
+## 📜 License
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/ziadhorat/Plex-Spot.git
-cd Plex-Spot/development
-```
-### 2. Create a `.env` file
-Copy the `.env.example` to `.env` and fill in the necessary values
-
-### 3. Build and run using Docker Compose
-```bash
-docker-compose up --build
-```
-### 4. Access the app
-Open a web browser and navigate to `http://localhost:8501`.
-
-## 📝 TODO
-- Rename to media-library so Plex doesn't sue me.
-- Display poster or artist covers, with IMDb links if available.
-- Add support for multiple Plex servers (e.g., PLEX1, PLEX2).
-- Extend support to additional media servers like Emby or Jellyfin.
-- Consider querying Tautulli instead of Plex for better data access.
-- Fix importing of OS everywhere and rather handle debug true/false status in the logger.
-- Debug logs need to be cleaned up.
-  
-## ✨ Contributing
-Feel free to submit issues, feature or pull requests. 
-All contributions are welcome!
-
-## 📜  License
-This project is licensed under the MIT License. See the LICENSE file for details.
+MIT License. See [LICENSE](LICENSE) for details.
