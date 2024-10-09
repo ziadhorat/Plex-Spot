@@ -6,8 +6,8 @@ on:
       - main
   pull_request:
 jobs:
-  build:
-    name: Build
+  scan:
+    name: Scan
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
