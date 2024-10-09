@@ -129,7 +129,7 @@
                 <span>{{ title }}</span>
             </a>
             <button id="darkModeToggle" class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-                <i class="fas fa-moon mr-2"></i>Dark Mode
+                <i class="fas fa-moon mr-2"></i>Mode
             </button>
         </div>
     </nav>
@@ -138,11 +138,11 @@
         <div class="full-width-container mx-auto px-4"> <!-- Added this wrapper -->
             <div class="grid md:grid-cols-2 gap-4 mb-4">
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
-                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-play-circle mr-2"></i>Active Streams</h5>
+                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-play-circle mr-2"></i>Streams</h5>
                     <p class="text-3xl font-bold" id="activeStreams">Loading...</p>
                 </div>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
-                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-film mr-2"></i>Library Total</h5>
+                    <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-film mr-2"></i>Total</h5>
                     <p class="text-3xl font-bold" id="libraryTotal">Loading...</p>
                 </div>
             </div>
@@ -205,7 +205,7 @@
             function toggleDarkMode() {
                 isDarkMode = !isDarkMode;
                 document.documentElement.classList.toggle('dark', isDarkMode);
-                $('#darkModeToggle').html(isDarkMode ? '<i class="fas fa-sun mr-2"></i>Light Mode' : '<i class="fas fa-moon mr-2"></i>Dark Mode');
+                $('#darkModeToggle').html(isDarkMode ? '<i class="fas fa-sun mr-2"></i>Mode' : '<i class="fas fa-moon mr-2"></i>Mode');
                 localStorage.setItem('darkMode', isDarkMode);
             }
 
@@ -213,7 +213,7 @@
 
             if (isDarkMode) {
                 document.documentElement.classList.add('dark');
-                $('#darkModeToggle').html('<i class="fas fa-sun mr-2"></i>Light Mode');
+                $('#darkModeToggle').html('<i class="fas fa-sun mr-2"></i>Mode');
             }
 
             function updateUserStats() {
