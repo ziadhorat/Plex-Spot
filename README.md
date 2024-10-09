@@ -31,7 +31,7 @@ Access at `http://localhost:8501`
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `PLEX_API_TOKEN` | Your Plex API token | Yes |
-| `PLEX_SERVER_URL` | Your Plex server URL | Yes |
+| `PLEX_SERVER_URL` | Your Plex server URL (Use local IPv4 of plex instead of localhost) | Yes |
 | `DASHBOARD_TITLE` | Custom dashboard title | No |
 | `DASHBOARD_ICON` | Custom dashboard icon URL | No |
 | `DEBUG` | Enable debug mode (True/False) | No |

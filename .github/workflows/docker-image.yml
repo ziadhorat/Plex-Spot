@@ -65,7 +65,6 @@ jobs:
         tags: |
           ghcr.io/${{ github.repository_owner }}/plex-spot:latest
           ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}
-      continue-on-error: false  # Fail if build or push fails
 
     - name: Log out from GHCR
       run: docker logout
