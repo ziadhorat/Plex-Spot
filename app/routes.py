@@ -38,28 +38,39 @@ def get_libraries():
 @app.route('/api/library_contents/<library_key>')
 @cache.cached(timeout=3600)
 def library_contents(library_key):
-    contents = plex_client.get_library_contents(library_key)
-    media_items = contents.get('MediaContainer', {}).get('Video', []) or contents.get('MediaContainer', {}).get('Directory', [])
-    if isinstance(media_items, dict):
-        media_items = [media_items]
-    
-    formatted_items = []
-    for item in media_items:
-        genres = item.get('Genre', [])
-        if isinstance(genres, list):
-            genres = ", ".join(genre.get('@tag', 'N/A') for genre in genres)
-        elif isinstance(genres, dict):
-            genres = genres.get('@tag', 'N/A')
-        else:
-            genres = 'N/A'
+    try:
+        contents = plex_client.get_library_contents(library_key)
+        media_items = contents.get('MediaContainer', {}).get('Video', []) or contents.get('MediaContainer', {}).get('Directory', [])
+        if isinstance(media_items, dict):
+            media_items = [media_items]
         
-        formatted_items.append({
-            "title": item.get('@title', 'N/A'),
-            "year": item.get('@year', 'N/A'),
-            "genres": genres
-        })
-    
-    return jsonify(formatted_items)
+        formatted_items = []
+        for item in media_items:
+            genres = item.get('Genre', [])
+            if isinstance(genres, list):
+                genres = ", ".join(genre.get('@tag', 'N/A') for genre in genres)
+            elif isinstance(genres, dict):
+                genres = genres.get('@tag', 'N/A')
+            else:
+                genres = 'N/A'
+            
+            # Extract the added date
+            added_date = item.get('@addedAt', 'N/A')
+            if added_date != 'N/A':
+                from datetime import datetime
+                added_date = datetime.fromtimestamp(int(added_date)).strftime('%Y-%m-%d')
+            
+            formatted_items.append({
+                "title": item.get('@title', 'N/A'),
+                "year": item.get('@year', 'N/A'),
+                "genres": genres,
+                "added_date": added_date
+            })
+        
+        return jsonify(formatted_items)
+    except Exception as e:
+        app.logger.error(f"Error in library_contents route: {str(e)}")
+        return jsonify({'error': 'Unable to fetch library contents'}), 500
 
 @app.route('/api/genres/<library_key>')
 @cache.cached(timeout=3600)

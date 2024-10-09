@@ -105,6 +105,7 @@
                                 <th class="p-3">Title</th>
                                 <th class="p-3">Year</th>
                                 <th class="p-3">Genres</th>
+                                <th class="p-3">Added Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,6 +192,7 @@
                                 <td class="p-3">${item.title}</td>
                                 <td class="p-3">${item.year}</td>
                                 <td class="p-3">${item.genres}</td>
+                                <td class="p-3">${item.added_date}</td>
                             </tr>
                         `);
                     });
@@ -209,7 +211,13 @@
                         "ordering": true,
                         "info": true,
                         "searching": true,
-                        "responsive": true
+                        "responsive": true,
+                        "columns": [
+                            null,
+                            null,
+                            null,
+                            { "type": "date" }
+                        ]
                     });
                     $('#libraryTotal').text(data.length);
                     loadGenres(libraryKey);
