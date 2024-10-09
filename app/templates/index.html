@@ -120,10 +120,11 @@
             background-color: #1a202c;
         }
         @media (max-width: 640px) {
-            .mobile-grid {
-                display: grid;
+            .grid-cols-1.sm\:grid-cols-2.md\:grid-cols-3 {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
+            }
+            .grid-cols-1.sm\:grid-cols-2.md\:grid-cols-3 > *:last-child {
+                grid-column: 1 / -1;
             }
         }
     </style>
@@ -160,7 +161,7 @@
                 <select id="librarySelect" class="w-full mb-4 p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     <option value="">Select a Library</option>
                 </select>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
                     <select id="libraryContents_length" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                         <option value="25">Show 25 entries</option>
                         <option value="50">Show 50 entries</option>
@@ -169,9 +170,6 @@
                     </select>
                     <select id="genreFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                         <option value="">All Genres</option>
-                    </select>
-                    <select id="contentRatingFilter" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-                        <option value="">All Content Ratings</option>
                     </select>
                     <input type="search" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" placeholder="Search" aria-controls="libraryContents">
                 </div>
@@ -182,7 +180,6 @@
                                 <th class="p-3">Title</th>
                                 <th class="p-3">Year</th>
                                 <th class="p-3">Genres</th>
-                                <th class="p-3">Rating</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -275,7 +272,6 @@
                             table.destroy();
                         }
                         $('#libraryContents tbody').empty();
-                        let contentRatings = new Set();
                         data.forEach(function(item) {
                             $('#libraryContents tbody').append(`
                                 <tr class="border-b border-gray-200 dark:border-gray-700">
@@ -298,16 +294,8 @@
                                     </td>
                                     <td class="p-3">${escapeHtml(item.year)}</td>
                                     <td class="p-3">${escapeHtml(item.genres)}</td>
-                                    <td class="p-3">${escapeHtml(item.contentRating)}</td>
                                 </tr>
                             `);
-                            contentRatings.add(item.contentRating);
-                        });
-                        
-                        // Populate content rating filter
-                        $('#contentRatingFilter').empty().append('<option value="">All Content Ratings</option>');
-                        contentRatings.forEach(function(rating) {
-                            $('#contentRatingFilter').append(`<option value="${rating}">${rating}</option>`);
                         });
                         
                         table = $('#libraryContents').DataTable({
@@ -346,9 +334,6 @@
                         });
                         $('#genreFilter').on('change', function() {
                             table.column(2).search(this.value).draw();
-                        });
-                        $('#contentRatingFilter').on('change', function() {
-                            table.column(3).search(this.value).draw();
                         });
 
                         loadGenres(libraryKey);
