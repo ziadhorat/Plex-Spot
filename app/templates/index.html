@@ -313,6 +313,15 @@
                             "drawCallback": function() {
                                 $('.paginate_button').addClass('px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600');
                                 $('.paginate_button.current').addClass('bg-primary text-white');
+                                
+                                // Reinitialize Tippy tooltips after each draw
+                                tippy('.info-button', {
+                                    theme: 'light',
+                                    placement: 'right',
+                                    allowHTML: true,
+                                    interactive: true,
+                                    maxWidth: 300,
+                                });
                             },
                             "paging": true,
                             "ordering": true,
@@ -334,15 +343,6 @@
                         });
                         $('#contentRatingFilter').on('change', function() {
                             table.column(3).search(this.value).draw();
-                        });
-
-                        // Initialize Tippy tooltips
-                        tippy('.info-button', {
-                            theme: 'light',
-                            placement: 'right',
-                            allowHTML: true,
-                            interactive: true,
-                            maxWidth: 300,
                         });
 
                         // Load genres for the selected library
