@@ -6,7 +6,7 @@ PlexSpot: Your Plex server's elegant public face. Showcase your media library wi
 
 [Docker Hub](https://hub.docker.com/r/ziadhorat/plex-spot) | [Live Demo](https://plex-spot.labhome.co.za)
 
-![DemoGif](https://github.com/user-attachments/assets/ea9717e0-d322-45b8-8765-184858774d75)
+![DemoGif](https://github.com/user-attachments/assets/70c510c5-c95b-4d86-8597-0d919b554096)
 
 ## 🚀 Quick Start
 
