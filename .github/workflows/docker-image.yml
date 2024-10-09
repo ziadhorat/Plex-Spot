@@ -33,11 +33,13 @@ jobs:
       continue-on-error: false  # Fail if authentication fails
 
     - name: Build and push Docker image to Docker Hub
-      uses: docker/build-push-action@v3  # Updated to v3
+      uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/amd64,linux/arm64  # Specify multiple architectures
+        platforms: linux/amd64,linux/arm64
         push: true
+        build-args: |
+          APP_VERSION=${{ env.VERSION }}
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/plex-spot:latest
           ${{ secrets.DOCKER_USERNAME }}/plex-spot:${{ env.VERSION }}
@@ -53,11 +55,13 @@ jobs:
       continue-on-error: false  # Fail if authentication fails
 
     - name: Build and push Docker image to GHCR
-      uses: docker/build-push-action@v3  # Updated to v3
+      uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/amd64,linux/arm64  # Specify multiple architectures
+        platforms: linux/amd64,linux/arm64
         push: true
+        build-args: |
+          APP_VERSION=${{ env.VERSION }}
         tags: |
           ghcr.io/${{ github.repository_owner }}/plex-spot:latest
           ghcr.io/${{ github.repository_owner }}/plex-spot:${{ env.VERSION }}

@@ -15,7 +15,11 @@ plex_client = PlexClient(plex_server_url, plex_api_token)
 def index():
     libraries = get_libraries()
     default_library = libraries[0]['key'] if libraries else None
-    return render_template('index.html', title=dashboard_title, icon=dashboard_icon, default_library=default_library)
+    return render_template('index.html', 
+                           title=dashboard_title, 
+                           icon=dashboard_icon, 
+                           default_library=default_library,
+                           app_version=app.config['APP_VERSION'])
 
 @app.route('/api/user_stats')
 @cache.cached(timeout=60)
