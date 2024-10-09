@@ -58,7 +58,7 @@
         .info-button {
             cursor: pointer;
             color: #007bff;
-            margin-left: 5px;
+            margin-right: 2px;
             opacity: 0.7;
             transition: opacity 0.2s;
         }
@@ -71,6 +71,8 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 0.75rem;
+            line-height: 1.2;
         }
         .dark .tippy-box {
             background-color: #2d3748;
@@ -78,30 +80,16 @@
             border-color: #4a5568;
         }
         .tippy-content {
-            padding: 10px;
+            padding: 0.5rem;
         }
         .tippy-title {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .tippy-genres, .tippy-content-rating {
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-bottom: 0.25rem;
         }
         .tippy-summary {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin-top: 0.5rem;
         }
-        .tippy-details {
-            margin-top: 10px;
-        }
-        .tippy-studio {
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-        .tippy-summary {
-            font-size: 0.9em;
+        .tippy-details > div {
+            margin-bottom: 0.25rem;
         }
         /* Adjust header and footer styles */
         nav, footer {
@@ -276,16 +264,17 @@
                             $('#libraryContents tbody').append(`
                                 <tr class="border-b border-gray-200 dark:border-gray-700">
                                     <td class="p-3" data-sort="${escapeHtml(item.title)}">
-                                        <span class="info-button mr-2" data-tippy-content="
-                                            <div class='tippy-title'>${escapeHtml(item.title)} (${escapeHtml(item.year)})</div>
-                                            <div class='tippy-studio'>Studio: ${escapeHtml(item.studio || 'N/A')}</div>
-                                            <div class='tippy-genres'><strong>Genres:</strong> ${escapeHtml(item.genres)}</div>
-                                            <div class='tippy-content-rating'><strong>Content Rating:</strong> ${escapeHtml(item.contentRating)}</div>
-                                            <div class='tippy-summary'>${escapeHtml(item.summary || 'No summary available.')}</div>
-                                            <div class='tippy-details'>
-                                                <strong>Added:</strong> ${escapeHtml(item.added_date)}<br>
-                                                <strong>Rating:</strong> ${escapeHtml(item.rating)}<br>
-                                                <strong>Audience Rating:</strong> ${escapeHtml(item.audienceRating)}
+                                        <span class="info-button mr-1" data-tippy-content="
+                                            <div class='tippy-content text-xs'>
+                                                <div class='tippy-title font-bold'>${escapeHtml(item.title)} (${escapeHtml(item.year)})</div>
+                                                <div class='tippy-tagline italic'>${escapeHtml(item.tagline || '')}</div>
+                                                <div class='tippy-studio'>${escapeHtml(item.studio || 'N/A')}</div>
+                                                <div><strong>Genres:</strong> ${escapeHtml(item.genres)}</div>
+                                                <div><strong>Rated:</strong> ${escapeHtml(item.contentRating)}</div>
+                                                <div><strong>Added:</strong> ${escapeHtml(item.added_date)}</div>
+                                                <div><strong>Rating:</strong> ${escapeHtml(item.rating)}</div>
+                                                <div><strong>Audience Rating:</strong> ${escapeHtml(item.audienceRating)}</div>
+                                                <div class='tippy-summary mt-1'>${escapeHtml(item.summary || 'No summary available.')}</div>
                                             </div>
                                         ">
                                             <i class="fas fa-info-circle"></i>
@@ -315,6 +304,7 @@
                                     allowHTML: true,
                                     interactive: true,
                                     maxWidth: 300,
+                                    animation: 'scale',
                                 });
                             },
                             "paging": true,
