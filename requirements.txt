@@ -3,3 +3,4 @@ Werkzeug==3.0.3
 requests==2.32.0
 xmltodict==0.13.0
 Flask-Caching==2.1.0
+Pillow

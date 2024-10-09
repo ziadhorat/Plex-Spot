@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, abort
+from flask import render_template, jsonify, abort, send_from_directory
 from app import app, cache
 from app.plex_client import PlexClient
 import os
@@ -11,13 +11,21 @@ dashboard_icon = os.getenv("DASHBOARD_ICON", "https://cdn-icons-png.freepik.com/
 
 plex_client = PlexClient(plex_server_url, plex_api_token)
 
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory(app.static_folder, 'manifest.json')
+
+@app.route('/service-worker.js')
+def service_worker():
+    return app.send_static_file('service-worker.js')
+
 @app.route('/')
 def index():
     libraries = get_libraries()
     default_library = libraries[0]['key'] if libraries else None
     return render_template('index.html', 
-                           title=dashboard_title, 
-                           icon=dashboard_icon, 
+                           title=app.config['DASHBOARD_TITLE'], 
+                           icon=app.config['DASHBOARD_ICON'], 
                            default_library=default_library,
                            app_version=app.config['APP_VERSION'])
 
