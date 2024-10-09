@@ -66,6 +66,6 @@ Issues, features, and pull requests welcome! Let's make PlexSpot even better tog
 MIT License. See [LICENSE](LICENSE) for details.
 
 [release]: https://github.com/ziadhorat/Plex-Spot/releases/latest
-[release-img]: https://img.shields.io/github/ziadhorat/Plex-Spot.svg?logo=github
+[release-img]: https://img.shields.io/github/v/release/ziadhorat/Plex-Spot?logo=github
 [license]: https://github.com/ziadhorat/Plex-Spot/blob/master/LICENSE
 [license-img]: https://img.shields.io/github/license/ziadhorat/Plex-Spot
