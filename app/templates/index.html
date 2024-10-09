@@ -119,6 +119,13 @@
         .dark footer {
             background-color: #1a202c;
         }
+        @media (max-width: 640px) {
+            .mobile-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
@@ -134,9 +141,9 @@
         </div>
     </nav>
 
-    <main class="pt-16 pb-16"> <!-- Changed this line -->
-        <div class="full-width-container mx-auto px-4"> <!-- Added this wrapper -->
-            <div class="grid md:grid-cols-2 gap-4 mb-4">
+    <main class="pt-16 pb-16">
+        <div class="full-width-container mx-auto px-4">
+            <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transition-transform duration-300 hover:-translate-y-1">
                     <h5 class="text-lg font-semibold text-primary mb-2"><i class="fas fa-play-circle mr-2"></i>Streams</h5>
                     <p class="text-3xl font-bold" id="activeStreams">Loading...</p>
@@ -148,12 +155,12 @@
             </div>
         </div>
 
-        <div class="full-width-container mx-auto px-4"> <!-- Added this wrapper -->
+        <div class="full-width-container mx-auto px-4">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
                 <select id="librarySelect" class="w-full mb-4 p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                     <option value="">Select a Library</option>
                 </select>
-                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                     <select id="libraryContents_length" class="p-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                         <option value="25">Show 25 entries</option>
                         <option value="50">Show 50 entries</option>
@@ -314,7 +321,6 @@
                                 $('.paginate_button').addClass('px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600');
                                 $('.paginate_button.current').addClass('bg-primary text-white');
                                 
-                                // Reinitialize Tippy tooltips after each draw
                                 tippy('.info-button', {
                                     theme: 'light',
                                     placement: 'right',
@@ -345,7 +351,6 @@
                             table.column(3).search(this.value).draw();
                         });
 
-                        // Load genres for the selected library
                         loadGenres(libraryKey);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
