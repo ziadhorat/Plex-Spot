@@ -4,7 +4,7 @@ PlexSpot: Your Plex server's elegant public face. Showcase your media library wi
 
 ![size](https://img.shields.io/docker/image-size/11notes/keeweb/1.18.7?color=0eb305)
 ![pulls](https://img.shields.io/docker/pulls/11notes/keeweb?color=2b75d6) 
-[![GitHub Release][release-img]][version]
+[![GitHub Release][release-img]][release]
 [![License][license-img]][license]
 [![CodeQL](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/github-code-scanning/codeql)
 [![Trivy](https://github.com/ziadhorat/Plex-Spot/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ziadhorat/Plex-Spot/actions/workflows/trivy.yml)
