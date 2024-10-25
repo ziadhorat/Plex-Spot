@@ -2,7 +2,7 @@
 
 PlexSpot: Your Plex server's elegant public face. Showcase your media library with style and simplicity.
 
-![size](https://img.shields.io/docker/image-size/11notes/keeweb/1.18.7?color=0eb305)
+![size](https://img.shields.io/docker/image-size/ziadhorat/plex-spot/latest?color=0eb305)
 ![pulls](https://img.shields.io/docker/pulls/ziadhorat/plex-spot?color=2b75d6) 
 [![GitHub Release][release-img]][release]
 [![License][license-img]][license]
