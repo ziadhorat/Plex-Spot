@@ -1,6 +1,6 @@
 Flask==3.0.2
-Werkzeug==3.0.3
-requests==2.32.0
+Werkzeug==3.0.6
+requests==2.32.4
 xmltodict==0.13.0
 Flask-Caching==2.1.0
-Pillow
+Pillow==10.0.0
